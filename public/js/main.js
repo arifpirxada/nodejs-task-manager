@@ -5,8 +5,10 @@ const switchLog = (isLogged) => {
     const logout = document.querySelector(".logoutNav")
     if (isLogged === "yes") {
         sign.style.display = "none"
+        logout.style.display = "block"
     } else {
         logout.style.display = "none"
+        sign.style.display = "block"
     }
 }
 
