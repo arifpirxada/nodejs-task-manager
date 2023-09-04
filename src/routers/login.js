@@ -26,6 +26,7 @@ router.post("/login", async (req, res) => {
             res.status(400).json({ message: 'User not found' })
         }
     } catch (e) {
+        console.log(e)
         res.status(500).json({ message: 'Internal server error' })
     }
 })

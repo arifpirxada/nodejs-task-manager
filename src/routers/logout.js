@@ -8,7 +8,8 @@ router.get("/logout", auth, async (req, res) => {
         res.clearCookie("auth")
         await register.findByIdAndUpdate({ _id: req.id }, { $set: { token: "" } })
         res.status(200).redirect("/login")
-    } catch {
+    } catch (e) {
+        console.log(e)
         res.status(400).json({ message: "Internal server error" })
     }
 })

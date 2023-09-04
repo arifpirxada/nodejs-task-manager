@@ -31,7 +31,8 @@ router.post("/", auth, async (req, res) => {
                 }
             }
         }
-    } catch {
+    } catch (e) {
+        console.log(e)
         res.status(500).json({ message: 'Internal server error' })
     }
 })
@@ -41,7 +42,8 @@ router.patch("/", async (req, res) => {
         const _id = req.body.id
         await task.findByIdAndUpdate(_id, req.body)
         res.status(201).json({ message: 'Updation successful' })
-    } catch {
+    } catch (e) {
+        console.log(e)
         res.status(500).json({ message: 'Internal server error' })
     }
 })
@@ -51,7 +53,8 @@ router.delete("/", async (req, res) => {
         const _id = req.body.id
         await task.findByIdAndDelete(_id)
         res.status(201).json({ message: 'Deletion successful' })
-    } catch {
+    } catch (e) {
+        console.log(e)
         res.status(500).json({ message: 'Internal server error' })
     }
 })
