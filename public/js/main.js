@@ -10,6 +10,8 @@ const switchLog = (isLogged) => {
     }
 }
 
+switchLog("no")
+
 // Domain variable
 
 const myTasker = "https://mytasker.cyclic.app"
