@@ -49,13 +49,19 @@ Before you begin, ensure you have met the following requirements:
     JWT_SECRET_KEY=        # Secret key for JWT (JSON Web Tokens)
     ```
 
-5. Start the application:
+5. change the server url in main.js to localhost:
+
+    ```bash
+    const myTasker = "http://localhost:3000/"
+    ```
+
+6. Start the application:
 
     ```bash
     npm start
     ```
 
-6. The Task Manager Application should now be running on `http://localhost:3000`.
+7. The Task Manager Application should now be running on `http://localhost:3000`.
 
 ## Usage
 
