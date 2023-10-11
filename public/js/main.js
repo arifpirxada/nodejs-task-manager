@@ -16,8 +16,7 @@ switchLog("no")
 
 // Domain variable
 
-// const myTasker = "https://mytasker.cyclic.app/"
-const myTasker = "http://localhost:3000/"
+const myTasker = "https://mytasker.cyclic.app/"
 
 // Request for Signup
 
