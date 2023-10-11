@@ -18,9 +18,11 @@
 
     <!-- Notes Accordian and Add Notes Start Here -->
 
+    <div id="fetch-spinner" class="d-flex justify-content-center d-none">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
     <div class="noteAddContainer">
         <!-- Notes Here -->
-
         <div class="accordion taskContainer" id="accordionExample">
             <h1 id="taskHead">Hey !&nbsp; Your Tasks Here</h1>
             <p id="noData">No Tasks To show</p>
@@ -56,7 +58,7 @@
 
                 <p id="taskAlert">Add your tasks here</p>
                 <div class="flex-c">
-                    <button onclick="operTask('add')" class="btn btn-warning addTaskBtn">Add Task</button>
+                    <button onclick="operTask('add', event)" class="btn btn-warning addTaskBtn">Add Task</button>
                 </div>
             </div>
         </div>
@@ -88,12 +90,11 @@
 
                     <p id="editTaskAlert" style="text-align: center;">Update your tasks here</p>
                     <div class="flex-c">
-                        <button onclick="operEdit('edit')" class="btn btn-warning addTaskBtn"
-                            data-bs-dismiss="modal">Update</button>
+                        <button onclick="operEdit('edit', this)" class="btn btn-warning addTaskBtn">Update</button>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="close-modal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

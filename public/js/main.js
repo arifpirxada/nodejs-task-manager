@@ -16,11 +16,12 @@ switchLog("no")
 
 // Domain variable
 
-const myTasker = "https://mytasker.cyclic.app/"
+// const myTasker = "https://mytasker.cyclic.app/"
+const myTasker = "http://localhost:3000/"
 
 // Request for Signup
 
-const signup = async () => {
+const signup = async ( btn ) => {
     const name = document.getElementById("name").value
     const email = document.getElementById("email").value
     const pass = document.getElementById("pass").value
@@ -32,6 +33,8 @@ const signup = async () => {
     } else if (pass != cpass) {
         alert.innerHTML = "Passwords do not match!"
     } else {
+        btn.innerHTML = '<span class="spinner-border text-warning spinner-border" role="status" aria-hidden="true"></span>'
+
         const userData = {
             name: name,
             email: email,
@@ -47,6 +50,7 @@ const signup = async () => {
             }
         })
         const data = await response.json()
+        btn.innerHTML = 'Register'
 
         if (data.message === "Insertion successful") {
             alert.innerHTML = "success!"
@@ -59,7 +63,7 @@ const signup = async () => {
 
 // Request for Login
 
-const userLogin = async () => {
+const userLogin = async ( btn ) => {
     const email = document.getElementById("your_email").value
     const pass = document.getElementById("your_pass").value
     const inform = document.getElementById("inform")
@@ -67,6 +71,8 @@ const userLogin = async () => {
     if (email === "" || pass === "") {
         inform.innerHTML = "Please fill all the fields!"
     } else {
+        btn.innerHTML = '<span class="spinner-border text-warning spinner-border" role="status" aria-hidden="true"></span>'
+
         const logData = {
             email: email,
             pass: pass,
@@ -80,6 +86,7 @@ const userLogin = async () => {
             }
         })
         const resData = await res.json()
+        btn.innerHTML = 'Log in'
 
         if (resData.message === "Login success") {
             inform.innerHTML = "success!"
@@ -103,13 +110,14 @@ const changeId = (id, title, desc, taskNum) => {
 if (document.getElementById("taskTitle")) {
     var num = 0
 }
-const operTask = async (action) => {
+const operTask = async (action, e) => {
 
     const taskContainer = document.getElementById("accordionExample")
+    const fetchSpinner = document.getElementById("fetch-spinner")
 
     if (action === "fetch") {
         // Fetch Tasks
-
+        fetchSpinner.classList.remove("d-none")
         const userFetchData = {
             action: action
         }
@@ -122,6 +130,7 @@ const operTask = async (action) => {
             }
         })
         const resFetchData = await resp.json()
+        fetchSpinner.classList.add("d-none")
 
         if (resFetchData.message === "notLogged") {
             switchLog("no")
@@ -157,7 +166,6 @@ const operTask = async (action) => {
         }
     } else {
         // Add Tasks
-
         var title = document.getElementById("taskTitle")
         var desc = document.getElementById("taskDesc")
         const taskAlert = document.getElementById("taskAlert")
@@ -165,6 +173,8 @@ const operTask = async (action) => {
         if (title.value === "" || desc.value === "") {
             taskAlert.innerHTML = "Please fill all the fields!"
         } else {
+
+            e.target.innerHTML = '<span class="spinner-border text-primary spinner-border" role="status" aria-hidden="true"></span>'
             const userTaskData = {
                 action: action,
                 title: title.value,
@@ -180,6 +190,7 @@ const operTask = async (action) => {
             })
             const resTaskData = await reaction.json()
 
+            e.target.innerHTML = 'Add Task'
             if (resTaskData.message === "Insertion successful") {
                 window.location.href = window.location.href
                 title.value = ""
@@ -205,6 +216,7 @@ const operEdit = async (action, btn = "none") => {
 
     if (action === "edit") {
 
+        btn.innerHTML = '<span class="spinner-border text-primary spinner-border" role="status" aria-hidden="true"></span>'
         const upTaskId = document.getElementById("taskId").value
         const upTitle = document.getElementById("updateTitle").value
         const upDesc = document.getElementById("updateDesc").value
@@ -226,6 +238,8 @@ const operEdit = async (action, btn = "none") => {
             }
         })
         const upTaskData = await res.json()
+        btn.innerHTML = 'Update'
+        document.getElementById("close-modal").click()
 
         editAlert.innerHTML = upTaskData.message
         taskNumber = parseInt(taskNumber)
@@ -235,6 +249,7 @@ const operEdit = async (action, btn = "none") => {
             document.getElementById(taskNumber).children[0].innerHTML = upDesc
         }
     } else {
+        btn.innerHTML = '<span class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span>'
         const delData = {
             id: action
         }
@@ -248,6 +263,8 @@ const operEdit = async (action, btn = "none") => {
             }
         })
         const delTaskData = await res.json()
+        btn.innerHTML = 'Delete'
+
         if (delTaskData.message !== "Internal server error") {
             btn.parentElement.style.display = "none"
         }

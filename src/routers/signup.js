@@ -19,7 +19,8 @@ router.post("/signup", async (req, res) => {
 
         res.cookie("auth", newData.token, {
             httpOnly: true,
-            sameSite: "strict"
+            sameSite: "strict",
+            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
         })
         res.status(201).json({ message: 'Insertion successful' })
 

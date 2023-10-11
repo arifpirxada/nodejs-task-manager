@@ -17,7 +17,11 @@ router.post("/login", async (req, res) => {
                 }
                 await register.findByIdAndUpdate(user[0]._id, tokenData)
 
-                res.cookie("auth", tokenData.token)
+                res.cookie("auth", tokenData.token, {
+                    httpOnly: true,
+                    sameSite: "strict",
+                    expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+                })
                 res.status(200).json({ message: 'Login success', userName: user[0].name })
             } else {
                 res.status(400).json({ message: 'Wrong password' })
